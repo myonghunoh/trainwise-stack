@@ -1,0 +1,5 @@
+boto3==1.35.28
+redis==5.0.8
+rq==1.16.2
+faster-whisper==1.0.3
+python-dotenv==1.0.1

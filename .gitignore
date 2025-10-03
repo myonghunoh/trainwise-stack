@@ -1,0 +1,29 @@
+# Node / Vite
+frontend/node_modules/
+frontend/.vite/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Env & Secrets
+*.env
+*.env.* 
+!frontend/.env.example
+!api/.env.example
+
+# Docker/Volumes
+*.pid
+*.sock
+volumes/
+docker-data/
+
+# Medien
+*.mp4
+*.wav
+*.m4a
+
+# Sonstiges
+.DS_Store
