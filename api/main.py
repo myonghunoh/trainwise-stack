@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(title="TrainWise API")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], allow_methods=["*"], allow_headers=["*"]
+    allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"]
 )
 
 S3_ENDPOINT = os.getenv("S3_ENDPOINT")
@@ -46,7 +46,8 @@ def presign(req: PresignReq):
     return {"put_url": url, "s3_key": key}
 
 class STTRequest(BaseModel):
-    s3_key: str
+    s3_key: str | None = None
+    url: str | None = None
     lang: str | None = None
     model_size: str = "base"
 

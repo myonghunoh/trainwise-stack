@@ -20,8 +20,14 @@ def _load_model(size: str):
     return WhisperModel(size, device=device, compute_type=compute_type)
 
 def process(args: dict):
-    key = args["s3_key"]; lang = args.get("lang"); model_size = args.get("model_size","base")
-    with tempfile.TemporaryDirectory() as d:
+    url = args.get("url"); key = args.get("s3_key"); lang = args.get("lang"); model_size = args.get("model_size","base")
+with tempfile.TemporaryDirectory() as d:
+    if url:
+        import subprocess
+        src = f"{d}/audio.wav"
+        subprocess.check_call(["yt-dlp", "-f", "bestaudio", "-x", "--audio-format", "wav", "-o", src, url])
+        wav = src
+    else:
         src = f"{d}/in.bin"
         s3.download_file(S3_BUCKET, key, src)
         wav = f"{d}/audio.wav"
